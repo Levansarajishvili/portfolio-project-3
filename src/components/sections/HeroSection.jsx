@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/Button.jsx';
+import { LinkedInIcon } from '@/components/ui/LinkedInIcon.jsx';
 import { HeroMap } from '@/components/map/HeroMap.jsx';
 import { MapStyleControl } from '@/components/map/MapStyleControl.jsx';
 import { profile } from '@/data/profile.js';
@@ -39,9 +40,11 @@ export function HeroSection() {
           <p className="mt-[18px] max-w-[29ch] text-lg leading-normal lg:mt-7 lg:text-[21px]">{copy.hero.role}</p>
           <div className="mt-6 flex flex-col gap-2.5 sm:flex-row lg:mt-[34px] lg:gap-3">
             <Button href="#work">{copy.hero.seeWork}</Button>
-            {profile.cvUrl && (
-              <Button href={profile.cvUrl} variant="ghost" download>
-                {copy.hero.downloadCv}
+            {profile.linkedin.url && (
+              <Button href={profile.linkedin.url} variant="ghost" target="_blank" rel="noreferrer">
+                <LinkedInIcon className="size-[18px]" />
+                {copy.contact.linkedin}
+                <span className="sr-only"> {copy.work.newTab}</span>
               </Button>
             )}
           </div>

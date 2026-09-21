@@ -8,6 +8,7 @@ export const skills = [
   { id: 'tailwind', name: 'Tailwind CSS', category: 'frontend', symbol: 'dia', status: 'shipped' },
   { id: 'jquery', name: 'jQuery', category: 'frontend', symbol: 'tri', status: 'shipped' },
   { id: 'leaflet', name: 'Leaflet', category: 'frontend', symbol: 'pin', status: 'shipped' },
+  { id: 'openlayers', name: 'OpenLayers', category: 'frontend', symbol: 'pin', status: 'learning' },
   { id: 'nodejs', name: 'Node.js', category: 'backend', symbol: 'ci-d', status: 'learning' },
   { id: 'mongodb', name: 'MongoDB', category: 'backend', symbol: 'sq-d', status: 'learning' },
   { id: 'git', name: 'Git & GitHub', category: 'tools', symbol: 'x', status: 'shipped' },

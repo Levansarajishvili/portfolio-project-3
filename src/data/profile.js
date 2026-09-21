@@ -7,7 +7,6 @@ export const profile = {
     repositories: 'https://github.com/Levansarajishvili?tab=repositories',
   },
   // TODO: paste your LinkedIn profile URL. The row stays hidden while it is empty.
-  linkedin: { handle: 'Levan Sarajishvili', url: '' },
+  linkedin: { handle: 'Levan Sarajishvili', url: 'https://www.linkedin.com/in/levan-sarajishvili-376b93296' },
   // Put the PDF at public/cv/levan-sarajishvili-cv.pdf, or set this to null to hide the button.
-  cvUrl: '/cv/levan-sarajishvili-cv.pdf',
 };
