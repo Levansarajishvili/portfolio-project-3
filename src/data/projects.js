@@ -2,6 +2,7 @@ import mapOfGeorgia from '@/assets/projects/map-of-georgia.webp';
 import leoNews from '@/assets/projects/leo-news.webp';
 import shoppingCart from '@/assets/projects/shopping-cart.webp';
 import candyShop from '@/assets/projects/candy-shop.webp';
+import mapLayers from '@/assets/projects/map-layers.webp';
 
 /**
  * Language-independent project data. Titles, descriptions and field notes
@@ -21,7 +22,7 @@ export const projects = [
     stack: ['jquery', 'javascript', 'html-css'],
     image: { src: leoNews, width: 990, height: 583, position: '0% 0%' },
     demoUrl: 'https://levansarajishvili.github.io/Leo-News/',
-    codeUrl: 'https://github.com/Levansarajishvili/Leo-News',
+    codeUrl: null,
   },
   {
     id: 'shopping-cart',
@@ -34,7 +35,15 @@ export const projects = [
     id: 'candy-shop',
     stack: ['javascript', 'html-css'],
     image: { src: candyShop, width: 1263, height: 503, position: '50% 0%' },
-    demoUrl: null, // TODO: live demo URL
+    demoUrl: 'https://levansarajishvili.github.io/The-best-Candy-shop/',
+    codeUrl: null, // TODO: repository URL
+  },
+  {
+    id: 'map-layers',
+    stack: ['openlayers', 'javascript', 'html-css'],
+    image: { src: mapLayers, width: 1118, height: 508, position: '50% 50%' },
+    demoUrl: 'https://new-openlayers-project.vercel.app/',
     codeUrl: null, // TODO: repository URL
   },
 ];
+

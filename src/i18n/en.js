@@ -93,6 +93,12 @@ const en = {
       description: 'A restaurant menu with category filters for breakfast, lunch, shakes and dinner.',
       note: 'Learned to filter data on the page without a reload.',
     },
+    'map-layers': {
+      title: 'Map Layers',
+      description:
+        'An interactive map of Georgia built with OpenLayers. Six base maps, from OpenStreetMap and satellite to NASA’s Earth at Night, plus a marker layer you can switch on and off.',
+      note: 'Learned to add new layers, place markers at exact coordinates and stack thematic layers on one map.',
+    },
   },
   skills: {
     title: 'Skills',
@@ -111,6 +117,7 @@ const en = {
       tailwind: 'This portfolio',
       jquery: 'Leo News',
       leaflet: 'Map of Georgia',
+      openlayers: 'Map Layers',
       nodejs: 'Learning now',
       mongodb: 'Learning now',
       git: 'Every project',
