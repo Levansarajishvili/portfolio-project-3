@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en" data-theme="day">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Levan Sarajishvili, front-end developer in Tbilisi</title>
+    <meta
+      name="description"
+      content="Portfolio of Levan Sarajishvili, a front-end developer in Tbilisi who builds responsive interfaces with React, JavaScript and Tailwind."
+    />
+    <meta name="theme-color" content="#EEF2EC" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Levan Sarajishvili, front-end developer in Tbilisi" />
+    <meta
+      property="og:description"
+      content="Selected work, skills and contact. A portfolio drawn as a route across the map of Georgia."
+    />
+    <meta property="og:image" content="/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Apply the saved map style and language before the first paint (no flash). -->
+    <script>
+      (function () {
+        try {
+          var root = document.documentElement;
+          var theme = localStorage.getItem('ls:theme');
+          if (theme === 'day' || theme === 'night') root.dataset.theme = theme;
+          var lang = localStorage.getItem('ls:lang');
+          if (!lang && (navigator.language || '').toLowerCase().indexOf('ka') === 0) lang = 'ka';
+          if (lang === 'en' || lang === 'ka') root.lang = lang;
+        } catch (e) {
+          /* storage blocked: defaults stay */
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <noscript>This portfolio needs JavaScript. You can still reach me at levan.sarajishvili123@gmail.com.</noscript>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

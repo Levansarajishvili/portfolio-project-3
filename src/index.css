@@ -1,0 +1,279 @@
+@import 'tailwindcss';
+
+/* ------------------------------------------------------------------
+   Design tokens. Every colour is a CSS variable, so the "Night" map
+   style only has to swap the variables (see [data-theme="night"]).
+   ------------------------------------------------------------------ */
+@theme {
+  --font-sans: 'Archivo Variable', 'Noto Sans Georgian Variable', ui-sans-serif, system-ui, sans-serif;
+
+  --color-paper: #eef2ec;
+  --color-sea: #cfdfe2;
+  --color-land: #f5f8f3;
+  --color-panel: #ffffff;
+  --color-ink: #16233b;
+  --color-ink-2: #4b5b6e;
+  --color-rule: #c8d2ca;
+  --color-contour: #9db3a8;
+  --color-field: #ffffff;
+  --color-field-line: #9aa8a0;
+  --color-danger: #b42318;
+  --color-sea-label: #5e8591;
+  --color-range-label: #5f7a6e;
+
+  /* The route: light orange at the start, orangered at the destination. */
+  --color-route-start: #ffad66;
+  --color-route-end: #ff4500;
+}
+
+@layer base {
+  :root[data-theme='night'] {
+    color-scheme: dark;
+    --color-paper: #0e1928;
+    --color-sea: #0c2131;
+    --color-land: #16253a;
+    --color-panel: #16253a;
+    --color-ink: #e6edf4;
+    --color-ink-2: #a2b2c3;
+    --color-rule: #273a50;
+    --color-contour: #35546a;
+    --color-field: #0b1522;
+    --color-field-line: #3d526a;
+    --color-danger: #ff9a8c;
+    --color-sea-label: #7fa7b3;
+    --color-range-label: #8fa99d;
+    --color-route-start: #ffb27a;
+    --color-route-end: #ff4500;
+  }
+
+  html {
+    background: var(--color-paper);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    @apply bg-paper text-ink font-sans antialiased;
+    font-size: 16px;
+    line-height: 1.6;
+    font-variant-numeric: tabular-nums;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+
+  @media (min-width: 64rem) {
+    body {
+      font-size: 18px;
+    }
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--color-route-end) 28%, transparent);
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-route-end);
+    outline-offset: 3px;
+  }
+
+  input:focus-visible,
+  textarea:focus-visible {
+    outline-offset: 1px;
+  }
+}
+
+@layer components {
+  .link-underline {
+    text-decoration: underline;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 5px;
+    transition: text-decoration-color 0.15s ease;
+  }
+  .link-underline:hover {
+    text-decoration-color: var(--color-route-end);
+  }
+
+  /* Latin text is set in italic; Georgian has no italic tradition, keep it upright. */
+  .italic-latin {
+    font-style: italic;
+  }
+  :lang(ka) .italic-latin,
+  .italic-latin:lang(ka) {
+    font-style: normal;
+  }
+
+  /* ---------- map labels (live SVG text so they follow language + theme) ---------- */
+  .map-city {
+    fill: var(--color-ink);
+  }
+  .map-city-label {
+    font: 500 12.5px var(--font-sans);
+    fill: var(--color-ink);
+    paint-order: stroke;
+    stroke: var(--color-land);
+    stroke-width: 3px;
+    stroke-linejoin: round;
+  }
+  .map-tick {
+    font: 500 11px var(--font-sans);
+    fill: var(--color-ink);
+    opacity: 0.5;
+  }
+  .map-pin {
+    fill: var(--color-route-start);
+    stroke: var(--color-land);
+    stroke-width: 3;
+  }
+  .map-pin-halo {
+    fill: var(--color-route-start);
+    opacity: 0.25;
+  }
+  .map-pin-title {
+    font: 700 17px var(--font-sans);
+    font-stretch: 85%;
+    fill: var(--color-ink);
+    paint-order: stroke;
+    stroke: var(--color-land);
+    stroke-width: 4px;
+    stroke-linejoin: round;
+  }
+  .map-pin-coords {
+    font: 500 12px var(--font-sans);
+    fill: var(--color-ink-2);
+  }
+  .map-sea-primary {
+    font: italic 500 15px var(--font-sans);
+    letter-spacing: 0.32em;
+    fill: var(--color-sea-label);
+  }
+  .map-sea-secondary {
+    font: italic 500 13px var(--font-sans);
+    letter-spacing: 0.18em;
+    fill: var(--color-sea-label);
+  }
+  .map-range-label {
+    font: italic 500 14px var(--font-sans);
+    letter-spacing: 0.42em;
+    fill: var(--color-range-label);
+  }
+  .map-sea-primary:lang(ka),
+  .map-sea-secondary:lang(ka),
+  .map-range-label:lang(ka) {
+    font-style: normal;
+  }
+
+  /* Compact (mobile) map is drawn ~2.3x smaller: scale its type up to stay readable. */
+  .map-compact .map-city-label {
+    font-size: 24px;
+    stroke-width: 5px;
+  }
+  .map-compact .map-tick {
+    font-size: 21px;
+  }
+  .map-compact .map-pin {
+    stroke-width: 4.5;
+  }
+  .map-compact .map-pin-title {
+    font-size: 34px;
+    stroke-width: 6px;
+  }
+  .map-compact .map-range-label {
+    font-size: 22px;
+  }
+
+  /* ---------- the route ---------- */
+  .route-casing {
+    fill: none;
+    stroke: var(--color-land);
+    stroke-linecap: round;
+    opacity: 0.85;
+  }
+  .route-line {
+    fill: none;
+    stroke-linecap: round;
+  }
+
+  /* ---------- legend symbols (map-legend style, one per technology) ---------- */
+  .sym {
+    display: inline-block;
+    position: relative;
+    flex: none;
+    width: 13px;
+    height: 13px;
+  }
+  .sym-sq {
+    background: var(--color-ink);
+  }
+  .sym-sq-o {
+    border: 2px solid var(--color-ink);
+  }
+  .sym-ci {
+    background: var(--color-ink);
+    border-radius: 50%;
+  }
+  .sym-tri {
+    width: 0;
+    height: 0;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-bottom: 12px solid var(--color-ink);
+  }
+  .sym-pin {
+    background: var(--color-ink);
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg) scale(0.9);
+  }
+  .sym-dia {
+    background: var(--color-ink);
+    transform: rotate(45deg) scale(0.78);
+  }
+  .sym-ci-d {
+    border: 2px dashed var(--color-ink);
+    border-radius: 50%;
+  }
+  .sym-sq-d {
+    border: 2px dashed var(--color-ink);
+  }
+  .sym-x::before,
+  .sym-x::after {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: -1px;
+    width: 2.5px;
+    height: 15px;
+    background: var(--color-ink);
+    transform: rotate(45deg);
+  }
+  .sym-x::after {
+    transform: rotate(-45deg);
+  }
+  .sym-bar::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 4px;
+    width: 13px;
+    height: 5px;
+    background: var(--color-ink);
+  }
+  .sym-ring {
+    border: 3.5px double var(--color-ink);
+    border-radius: 50%;
+  }
+  .sym-chev::before {
+    content: '';
+    position: absolute;
+    left: 1px;
+    top: 1px;
+    width: 8px;
+    height: 8px;
+    border-right: 2.5px solid var(--color-ink);
+    border-bottom: 2.5px solid var(--color-ink);
+    transform: rotate(45deg);
+  }
+}
