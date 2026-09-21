@@ -20,8 +20,8 @@ export function SkillsSection() {
   );
 
   return (
-    <section id="skills" aria-labelledby="skills-title" className="relative scroll-mt-[72px] py-14 lg:scroll-mt-0 lg:py-20">
-      <div className={cn(container, 'relative z-[4]')}>
+    <section id="skills" aria-labelledby="skills-title" className="relative scroll-mt-18 py-14 lg:scroll-mt-0 lg:py-20">
+      <div className={cn(container, 'relative z-4')}>
         <div className={TRAIL_ROW}>
           <div className="hidden justify-center pt-3.5 lg:flex">
             <Waypoint progress={waypointProgress(projects.length)} />
@@ -35,7 +35,7 @@ export function SkillsSection() {
             <p className="sr-only" aria-live="polite">
               {copy.skills.showing(visible.length)}
             </p>
-            <ul className="grid grid-cols-1 gap-3 md:grid-cols-3 lg:grid-cols-4 lg:gap-[18px]">
+            <ul className="grid grid-cols-1 gap-3 md:grid-cols-3 lg:grid-cols-4 lg:gap-4.5">
               {visible.map((skill) => (
                 <li key={skill.id}>
                   <SkillCard skill={skill} />

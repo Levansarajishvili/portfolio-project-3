@@ -3,6 +3,7 @@ import { Waypoint } from '@/components/map/Waypoint.jsx';
 import { profile } from '@/data/profile.js';
 import { skillsById } from '@/data/skills.js';
 import { usePreferences } from '@/hooks/usePreferences.js';
+import { projectText } from '@/i18n/index.js';
 import { routeColor } from '@/lib/route.js';
 import { displayUrl } from '@/lib/utils.js';
 
@@ -15,18 +16,19 @@ function CompassIcon() {
   );
 }
 
-export function ProjectEntry({ project, progress }) {
+export function ProjectEntry({ project, progress, active = false }) {
   const { copy } = usePreferences();
-  const text = copy.projects[project.id];
+  const text = projectText(copy, project.id);
   const titleId = `${project.id}-title`;
 
   return (
     <article
+      id={project.id}
       aria-labelledby={titleId}
-      className="grid gap-[18px] py-9 lg:grid-cols-[72px_380px_minmax(0,1fr)] lg:items-start lg:gap-x-10 lg:gap-y-0 lg:py-16"
+      className="grid scroll-mt-[72px] gap-[18px] py-9 lg:scroll-mt-[60px] lg:grid-cols-[72px_380px_minmax(0,1fr)] lg:items-start lg:gap-x-10 lg:gap-y-0 lg:py-16"
     >
       <div className="hidden justify-center pt-3.5 lg:flex">
-        <Waypoint progress={progress} />
+        <Waypoint progress={progress} active={active} />
       </div>
 
       <div className="order-2 lg:order-none">

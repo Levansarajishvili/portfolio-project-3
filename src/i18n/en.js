@@ -1,3 +1,7 @@
+// "Four stops so far": number words for the project count (digits above ten).
+const NUMBER_WORDS = ['No', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten'];
+const countWord = (count) => NUMBER_WORDS[count] ?? String(count);
+
 const en = {
   meta: {
     title: 'Levan Sarajishvili, front-end developer in Tbilisi',
@@ -47,9 +51,12 @@ const en = {
   },
   work: {
     title: 'Selected work',
-    intro: 'Four stops so far. Each one taught me something I did not know when I started it.',
+    intro: (count) =>
+      count === 1
+        ? 'One stop so far. It taught me something I did not know when I started it.'
+        : `${countWord(count)} stops so far. Each one taught me something I did not know when I started it.`,
     profile: {
-      label: 'Route profile: four projects on a climb that keeps going',
+      label: (count) => `Route profile: ${count} ${count === 1 ? 'project' : 'projects'} on a climb that keeps going`,
       start: 'Tbilisi, start',
       next: 'Next: full-stack',
       climbing: 'Still climbing',
