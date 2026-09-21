@@ -6,6 +6,7 @@ import { Waypoint } from '@/components/map/Waypoint.jsx';
 import { projects } from '@/data/projects.js';
 import { skills } from '@/data/skills.js';
 import { usePreferences } from '@/hooks/usePreferences.js';
+import { reveal } from '@/lib/reveal.js';
 import { waypointProgress } from '@/lib/route.js';
 import { cn, container } from '@/lib/utils.js';
 
@@ -20,8 +21,8 @@ export function SkillsSection() {
   );
 
   return (
-    <section id="skills" aria-labelledby="skills-title" className="relative scroll-mt-18 py-14 lg:scroll-mt-0 lg:py-20">
-      <div className={cn(container, 'relative z-4')}>
+    <section id="skills" aria-labelledby="skills-title" className="relative scroll-mt-[72px] py-14 lg:scroll-mt-0 lg:py-20">
+      <div className={cn(container, 'relative z-[4]')}>
         <div className={TRAIL_ROW}>
           <div className="hidden justify-center pt-3.5 lg:flex">
             <Waypoint progress={waypointProgress(projects.length)} />
@@ -31,13 +32,19 @@ export function SkillsSection() {
         <div className={TRAIL_ROW}>
           <div aria-hidden="true" className="hidden lg:block" />
           <div>
-            <SkillFilter value={filter} onChange={setFilter} />
+            <div ref={reveal} data-reveal="up" className="[--reveal-delay:80ms]">
+              <SkillFilter value={filter} onChange={setFilter} />
+            </div>
             <p className="sr-only" aria-live="polite">
               {copy.skills.showing(visible.length)}
             </p>
-            <ul className="grid grid-cols-1 gap-3 md:grid-cols-3 lg:grid-cols-4 lg:gap-4.5">
-              {visible.map((skill) => (
-                <li key={skill.id}>
+            <ul
+              ref={reveal}
+              data-reveal-group=""
+              className="grid grid-cols-2 gap-3 [--reveal-delay:150ms] md:grid-cols-3 lg:grid-cols-4 lg:gap-[18px]"
+            >
+              {visible.map((skill, index) => (
+                <li key={skill.id} style={{ '--i': index }}>
                   <SkillCard skill={skill} />
                 </li>
               ))}

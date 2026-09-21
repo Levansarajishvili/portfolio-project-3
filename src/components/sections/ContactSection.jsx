@@ -4,6 +4,7 @@ import { Waypoint } from '@/components/map/Waypoint.jsx';
 import { profile } from '@/data/profile.js';
 import { usePreferences } from '@/hooks/usePreferences.js';
 import { TBILISI } from '@/lib/geo.js';
+import { reveal } from '@/lib/reveal.js';
 import { cn, container } from '@/lib/utils.js';
 
 export function ContactSection() {
@@ -52,7 +53,7 @@ export function ContactSection() {
         <div>
           <SectionHeader id="contact-title" title={text.title} intro={text.intro} />
           <div className="mt-[18px] grid gap-9 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-start lg:gap-14">
-            <div>
+            <div ref={reveal} data-reveal="up">
               <a
                 href={`mailto:${profile.email}`}
                 className="inline-block text-[22px] leading-[1.15] font-bold tracking-[-0.015em] underline decoration-route-end decoration-[3px] underline-offset-[9px] [font-stretch:78%] [overflow-wrap:anywhere] md:text-[30px] xl:text-[34px]"
@@ -71,7 +72,9 @@ export function ContactSection() {
                 ))}
               </dl>
             </div>
-            <ContactForm />
+            <div ref={reveal} data-reveal="up" className="[--reveal-delay:150ms]">
+              <ContactForm />
+            </div>
           </div>
         </div>
       </div>

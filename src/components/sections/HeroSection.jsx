@@ -22,7 +22,7 @@ export function HeroSection() {
       />
 
       <div className="relative z-[5] mx-auto w-full max-w-[1440px] lg:px-16">
-        <MapStyleControl className="absolute right-16 top-24 z-[6] hidden lg:block" />
+        <MapStyleControl className="hero-in absolute right-16 top-24 z-[6] hidden [--d:700ms] lg:block" />
 
         <div className="px-5 pb-7 pt-[92px] md:px-8 lg:w-[620px] lg:px-0 lg:pb-12 lg:pt-[128px] xl:w-[min(560px,42vw)] xl:pb-24 xl:pt-[140px]">
           <h1
@@ -34,11 +34,18 @@ export function HeroSection() {
                 : 'text-[clamp(52px,16vw,64px)] leading-[0.9] lg:text-[clamp(64px,6.8vw,98px)]',
             )}
           >
-            <span className="block">{copy.hero.firstName}</span>
-            <span className="block">{copy.hero.lastName}</span>
+            {/* Each line rises from behind its own mask; the padding keeps accents and descenders visible. */}
+            <span className="hero-line -my-[0.16em] block overflow-hidden py-[0.16em]">
+              <span className="block [--d:120ms]">{copy.hero.firstName}</span>
+            </span>
+            <span className="hero-line -my-[0.16em] block overflow-hidden py-[0.16em]">
+              <span className="block [--d:230ms]">{copy.hero.lastName}</span>
+            </span>
           </h1>
-          <p className="mt-[18px] max-w-[29ch] text-lg leading-normal lg:mt-7 lg:text-[21px]">{copy.hero.role}</p>
-          <div className="mt-6 flex flex-col gap-2.5 sm:flex-row lg:mt-[34px] lg:gap-3">
+          <p className="hero-in mt-[18px] max-w-[29ch] text-lg leading-normal [--d:380ms] lg:mt-7 lg:text-[21px]">
+            {copy.hero.role}
+          </p>
+          <div className="hero-in mt-6 flex flex-col gap-2.5 [--d:500ms] sm:flex-row lg:mt-[34px] lg:gap-3">
             <Button href="#work">{copy.hero.seeWork}</Button>
             {profile.linkedin.url && (
               <Button href={profile.linkedin.url} variant="ghost" target="_blank" rel="noreferrer">
@@ -48,7 +55,7 @@ export function HeroSection() {
               </Button>
             )}
           </div>
-          <p className="mt-[22px] flex items-center gap-2.5 text-[15px] font-medium text-ink-2">
+          <p className="hero-in mt-[22px] flex items-center gap-2.5 text-[15px] font-medium text-ink-2 [--d:620ms]">
             <span aria-hidden="true" className="size-2.5 rounded-full border-2 border-ink-2" />
             {copy.hero.status}
           </p>
@@ -56,7 +63,7 @@ export function HeroSection() {
       </div>
 
       <HeroMap className="hidden aspect-[1440/818] w-full lg:block xl:absolute xl:inset-0 xl:aspect-auto xl:h-full" />
-      <HeroMap variant="compact" className="block aspect-[390/300] w-full lg:hidden" />
+      <HeroMap variant="compact" className="hero-in block aspect-[390/300] w-full [--d:300ms] lg:hidden" />
     </section>
   );
 }

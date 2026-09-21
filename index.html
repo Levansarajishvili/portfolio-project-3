@@ -20,11 +20,13 @@
     <meta property="og:image" content="/og-image.png" />
     <meta name="twitter:card" content="summary_large_image" />
 
-    <!-- Apply the saved map style and language before the first paint (no flash). -->
+    <!-- Before the first paint: saved map style + language (no flash) and the motion flag. -->
     <script>
       (function () {
+        var root = document.documentElement;
+        // Scroll/entrance animations only run when the browser can reveal content again.
+        if ('IntersectionObserver' in window) root.dataset.motion = 'on';
         try {
-          var root = document.documentElement;
           var theme = localStorage.getItem('ls:theme');
           if (theme === 'day' || theme === 'night') root.dataset.theme = theme;
           var lang = localStorage.getItem('ls:lang');

@@ -4,6 +4,7 @@ import { profile } from '@/data/profile.js';
 import { skillsById } from '@/data/skills.js';
 import { usePreferences } from '@/hooks/usePreferences.js';
 import { projectText } from '@/i18n/index.js';
+import { reveal } from '@/lib/reveal.js';
 import { routeColor } from '@/lib/route.js';
 import { displayUrl } from '@/lib/utils.js';
 
@@ -31,7 +32,7 @@ export function ProjectEntry({ project, progress, active = false }) {
         <Waypoint progress={progress} active={active} />
       </div>
 
-      <div className="order-2 lg:order-none">
+      <div ref={reveal} data-reveal="up" className="order-2 lg:order-none">
         <h3
           id={titleId}
           className="text-[32px] leading-[1.08] font-[720] tracking-[-0.01em] [font-stretch:80%] lg:text-[40px]"
@@ -79,7 +80,11 @@ export function ProjectEntry({ project, progress, active = false }) {
         </aside>
       </div>
 
-      <figure className="order-1 border-[1.5px] border-ink bg-land p-[7px] lg:order-none">
+      <figure
+        ref={reveal}
+        data-reveal="unroll"
+        className="order-1 border-[1.5px] border-ink bg-land p-[7px] [--reveal-delay:150ms] lg:order-none"
+      >
         <img
           src={project.image.src}
           width={project.image.width}

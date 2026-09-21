@@ -27,6 +27,14 @@
 }
 
 @layer base {
+  :root {
+    /* Motion tokens: tune every entrance animation from here. */
+    --reveal-distance: 28px;
+    --reveal-duration: 0.8s;
+    --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+    --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
   :root[data-theme='night'] {
     color-scheme: dark;
     --color-paper: #0e1928;
@@ -275,5 +283,160 @@
     border-right: 2.5px solid var(--color-ink);
     border-bottom: 2.5px solid var(--color-ink);
     transform: rotate(45deg);
+  }
+}
+
+/* ------------------------------------------------------------------
+   Motion. Sections appear as you travel down the route.
+   Off for prefers-reduced-motion and when there is no data-motion flag
+   (set in index.html), so content is never hidden without a way back.
+   Animations use fill-mode "backwards": once finished, elements keep no
+   leftover transform or clip, so the route layer always measures true
+   positions. Nothing that contains a [data-waypoint] is ever translated.
+   ------------------------------------------------------------------ */
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(var(--reveal-distance));
+  }
+}
+@keyframes reveal-fade {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes reveal-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  65% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes reveal-unroll {
+  from {
+    clip-path: inset(-60px 100% -60px -20px);
+  }
+  to {
+    clip-path: inset(-60px -60px -60px -20px);
+  }
+}
+@keyframes line-up {
+  from {
+    transform: translateY(110%);
+  }
+}
+@keyframes ripple {
+  from {
+    opacity: 0.7;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 0;
+    transform: scale(2.3);
+  }
+}
+@keyframes pin-pulse {
+  from {
+    opacity: 0.6;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 0;
+    transform: scale(2.4);
+  }
+}
+@keyframes compass-turn {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+@layer components {
+  /* Always-present, invisible-until-animated helpers. */
+  .map-pin-pulse {
+    fill: none;
+    stroke: var(--color-route-start);
+    stroke-width: 2.5;
+    opacity: 0;
+  }
+  .waypoint-ripple::after {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: inherit;
+    border: 2px solid var(--ripple-color, currentColor);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    /* ---- scroll reveal ---- */
+    :root[data-motion='on'] [data-reveal]:not([data-revealed]),
+    :root[data-motion='on'] [data-reveal-group]:not([data-revealed]) > * {
+      opacity: 0;
+    }
+    :root[data-motion='on'] [data-reveal][data-revealed] {
+      animation: reveal-up var(--reveal-duration) var(--ease-out-quart) var(--reveal-delay, 0ms) backwards;
+    }
+    :root[data-motion='on'] [data-reveal='fade'][data-revealed] {
+      animation-name: reveal-fade;
+    }
+    :root[data-motion='on'] [data-reveal='pop'][data-revealed] {
+      animation-name: reveal-pop;
+      animation-duration: 0.65s;
+      animation-timing-function: var(--ease-out-back);
+    }
+    :root[data-motion='on'] [data-reveal='unroll'][data-revealed] {
+      animation-name: reveal-unroll;
+      animation-duration: 1.2s;
+    }
+    /* Children of a group rise one after another (also new cards after a filter change). */
+    :root[data-motion='on'] [data-reveal-group][data-revealed] > * {
+      animation: reveal-up var(--reveal-duration) var(--ease-out-quart) backwards;
+      animation-delay: calc(var(--reveal-delay, 0ms) + min(var(--i, 0) * 60ms, 600ms));
+    }
+
+    /* ---- hero entrance on load ---- */
+    :root[data-motion='on'] .hero-in {
+      animation: reveal-up 0.9s var(--ease-out-quart) var(--d, 0ms) backwards;
+    }
+    :root[data-motion='on'] .hero-line > span {
+      animation: line-up 1s var(--ease-out-quart) var(--d, 0ms) backwards;
+    }
+    :root[data-motion='on'] .map-pin-pop {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: reveal-pop 0.7s var(--ease-out-back) 0.6s backwards;
+    }
+    :root[data-motion='on'] .map-pin-pulse {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: pin-pulse 2.2s ease-out 1.3s 3 backwards;
+    }
+    :root[data-motion='on'] .route-layer {
+      animation: reveal-fade 1s ease-out 0.4s backwards;
+    }
+
+    /* ---- small details ---- */
+    :root[data-motion='on'] .waypoint-ripple[data-revealed]::after {
+      animation: ripple 1.2s ease-out 0.35s backwards;
+    }
+    :root[data-motion='on'] [data-revealed] .spin-once {
+      animation: compass-turn 2.4s var(--ease-out-quart) 0.5s backwards;
+    }
+  }
+
+  @media print {
+    [data-reveal],
+    [data-reveal-group] > * {
+      opacity: 1 !important;
+      animation: none !important;
+    }
   }
 }

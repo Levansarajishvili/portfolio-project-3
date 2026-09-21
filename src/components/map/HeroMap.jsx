@@ -68,13 +68,10 @@ export function HeroMap({ variant = 'full', className }) {
       </text>
 
       <circle cx={TBILISI.x} cy={TBILISI.y} r={22 * k} className="map-pin-halo" />
-      <circle
-        cx={TBILISI.x}
-        cy={TBILISI.y}
-        r={8 * k}
-        className="map-pin"
-        {...(full ? { 'data-route-start': '' } : {})}
-      />
+      <circle cx={TBILISI.x} cy={TBILISI.y} r={16 * k} className="map-pin-pulse" />
+      <circle cx={TBILISI.x} cy={TBILISI.y} r={8 * k} className="map-pin map-pin-pop" />
+      {/* Static, invisible anchor for the page route: the visible pin animates, this never moves. */}
+      {full && <circle cx={TBILISI.x} cy={TBILISI.y} r="8" fill="none" data-route-start="" />}
       <text x={TBILISI.x + 18 * k} y={TBILISI.y + (full ? -6 : 10)} className="map-pin-title">
         {copy.map.cities.tbilisi}
       </text>

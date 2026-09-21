@@ -140,7 +140,7 @@ export function RouteLayer({ containerRef }) {
       width={width}
       height={height}
       viewBox={`0 0 ${width} ${height}`}
-      className="pointer-events-none absolute left-0 top-0 z-[3] overflow-visible"
+      className="route-layer pointer-events-none absolute left-0 top-0 z-[3] overflow-visible"
     >
       <defs>
         <linearGradient id={gradient} gradientUnits="userSpaceOnUse" x1="0" y1={top} x2="0" y2={bottom}>

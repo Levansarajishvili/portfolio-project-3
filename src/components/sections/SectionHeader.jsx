@@ -1,3 +1,4 @@
+import { reveal } from '@/lib/reveal.js';
 import { cn } from '@/lib/utils.js';
 
 export function SectionHeader({ id, title, intro, className }) {
@@ -10,11 +11,17 @@ export function SectionHeader({ id, title, intro, className }) {
     >
       <h2
         id={id}
+        ref={reveal}
+        data-reveal="up"
         className="text-[44px] leading-[1.05] font-[740] tracking-[-0.015em] [font-stretch:78%] lg:text-[64px]"
       >
         {title}
       </h2>
-      {intro && <p className="max-w-[36ch] text-ink-2 lg:text-right lg:text-lg">{intro}</p>}
+      {intro && (
+        <p ref={reveal} data-reveal="up" className="max-w-[36ch] text-ink-2 [--reveal-delay:120ms] lg:text-right lg:text-lg">
+          {intro}
+        </p>
+      )}
     </header>
   );
 }

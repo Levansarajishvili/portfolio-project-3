@@ -3,6 +3,7 @@ import { projects } from '@/data/projects.js';
 import { usePreferences } from '@/hooks/usePreferences.js';
 import { projectText } from '@/i18n/index.js';
 import { buildProfile } from '@/lib/profile-path.js';
+import { reveal } from '@/lib/reveal.js';
 import { cn } from '@/lib/utils.js';
 
 // One stop per project, spread evenly over the explored part of the climb.
@@ -32,7 +33,12 @@ export function RouteProfile({ activeId = null }) {
 
   return (
     <nav aria-label={copy.work.profile.label(projects.length)} className="my-2.5">
-      <svg viewBox={`0 -10 ${width} ${height + 34}`} className="block h-auto w-full overflow-visible">
+      <svg
+        ref={reveal}
+        data-reveal="unroll"
+        viewBox={`0 -10 ${width} ${height + 34}`}
+        className="block h-auto w-full overflow-visible"
+      >
         <defs>
           <linearGradient id={gradient} x1="0" x2="1">
             <stop offset="0" style={{ stopColor: 'var(--color-route-start)' }} />
