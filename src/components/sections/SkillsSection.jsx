@@ -41,7 +41,7 @@ export function SkillsSection() {
             <ul
               ref={reveal}
               data-reveal-group=""
-              className="grid grid-cols-2 gap-3 [--reveal-delay:150ms] md:grid-cols-3 lg:grid-cols-4 lg:gap-[18px]"
+              className="grid grid-cols-1 gap-3 [--reveal-delay:150ms] sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-[18px]"
             >
               {visible.map((skill, index) => (
                 <li key={skill.id} style={{ '--i': index }}>
