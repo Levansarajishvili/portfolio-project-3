@@ -1,7 +1,7 @@
 /** Label + control + error/counter row. The control receives id / aria-* from the parent. */
 export function FormField({ id, label, error, meta, children }) {
   return (
-    <div className="flex flex-col gap-[7px]">
+    <div className="flex flex-col gap-1.75">
       <label htmlFor={id} className="text-[14.5px] font-semibold">
         {label}
       </label>

@@ -21,7 +21,7 @@ export const projects = [
     id: 'leo-news',
     stack: ['jquery', 'javascript', 'html-css'],
     image: { src: leoNews, width: 990, height: 583, position: '0% 0%' },
-    demoUrl: 'https://levansarajishvili.github.io/Leo-News/',
+    demoUrl: 'https://news-topaz-five.vercel.app/',
     codeUrl: null,
   },
   {

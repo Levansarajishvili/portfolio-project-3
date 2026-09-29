@@ -18,11 +18,11 @@ export function HeroSection() {
       {/* xl+: the map is a full-bleed backdrop. Below xl the copy would cover Georgia, so it stacks. */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-y-0 left-0 hidden w-[44%] bg-gradient-to-r from-sea/60 via-sea/20 to-transparent xl:z-[1] xl:block"
+        className="pointer-events-none absolute inset-y-0 left-0 hidden w-[44%] bg-linear-to-r from-sea/60 via-sea/20 to-transparent xl:z-1 xl:block"
       />
 
-      <div className="relative z-[5] mx-auto w-full max-w-[1440px] lg:px-16">
-        <MapStyleControl className="hero-in absolute right-16 top-24 z-[6] hidden [--d:700ms] lg:block" />
+      <div className="relative z-5 mx-auto w-full max-w-360 lg:px-16">
+        <MapStyleControl className="hero-in absolute right-16 top-24 z-6 hidden [--d:700ms] lg:block" />
 
         <div className="px-5 pb-7 pt-[92px] md:px-8 lg:w-[620px] lg:px-0 lg:pb-12 lg:pt-[128px] xl:w-[min(560px,42vw)] xl:pb-24 xl:pt-[140px]">
           <h1
@@ -49,7 +49,7 @@ export function HeroSection() {
             <Button href="#work">{copy.hero.seeWork}</Button>
             {profile.linkedin.url && (
               <Button href={profile.linkedin.url} variant="ghost" target="_blank" rel="noreferrer">
-                <LinkedInIcon className="size-[18px]" />
+                <LinkedInIcon className="size-4.5" />
                 {copy.contact.linkedin}
                 <span className="sr-only"> {copy.work.newTab}</span>
               </Button>
