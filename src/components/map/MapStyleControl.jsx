@@ -1,5 +1,5 @@
 import { useId } from 'react';
-import { Layers } from 'lucide-react';
+// import { Layers } from 'lucide-react';
 import { usePreferences } from '@/hooks/usePreferences.js';
 import { cn } from '@/lib/utils.js';
 
@@ -19,10 +19,10 @@ export function MapStyleControl({ className }) {
         className,
       )}
     >
-      <p id={`${id}-title`} className="mb-1.5 flex items-center gap-2 font-semibold">
+      {/* <p id={`${id}-title`} className="mb-1.5 flex items-center gap-2 font-semibold">
         <Layers size={17} aria-hidden="true" />
-        {copy.map.style}
-      </p>
+        {copy.map.dark}
+      </p> */}
       {STYLES.map((style) => (
         <label key={style} className="flex cursor-pointer items-center gap-2 py-[3px]">
           <input

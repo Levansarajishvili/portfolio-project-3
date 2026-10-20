@@ -11,7 +11,6 @@ export function Footer() {
         <span>
           © {YEAR} {copy.hero.fullName}
         </span>
-        <span>{copy.footer.credit}</span>
       </div>
     </footer>
   );
